@@ -10,7 +10,7 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.get("/api", async (req, res) => {
   console.log("get api call")
-  const prompt = 'Write an article about waterloo being depressing'
+  const prompt = `${req.query.prompt}` || "This is a default article because you did not enter anything"
   const response = await cohere.generate('xlarge', {
     prompt,
     max_tokens: 50,
