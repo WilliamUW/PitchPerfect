@@ -14,9 +14,10 @@ app.get("/api", async (req, res) => {
   const prompt = `Command: Write a sales pitch email from ${req.query.seller} to ${req.query.client} who ${req.query.clientTraits} regarding why ${req.query.client} must buy the new ${req.query.product} which is ${req.query.productTraits} \nSales Email:`
   // const prompt = `Command: Write a sales pitch for ${req.query.prompt}` || "This is a default article because you did not enter anything"
   console.log("Prompt: " + prompt);
+  let tokensNum = parseInt(`${req.query.tokens}`) || 250
   const response = await cohere.generate('xlarge', {
     prompt: prompt,
-    max_tokens: 250,
+    max_tokens: tokensNum,
     temperature: 0.6,
     k: 0,
     p: 1,

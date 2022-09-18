@@ -36,11 +36,16 @@ function App() {
     setClientTraits(abc.target.value)
   }
 
+  const [tokens, setTokens] = React.useState(250)
+  const handleChangeTokens = (abc) => {
+    setTokens(abc.target.value)
+  }
+
   // When handleSubmit is called, passes prompt to /api and then gets assigns response to data
   const handleSubmit = (abc) => {
     abc.preventDefault()
     setData("Processing...")
-    fetch(`/api?prompt=${prompt}&product=${product}&productTraits=${product_traits}&seller=${seller}&client=${client}&clientTraits=${client_traits}`)
+    fetch(`/api?prompt=${prompt}&product=${product}&productTraits=${product_traits}&seller=${seller}&client=${client}&clientTraits=${client_traits}&tokens=${tokens}`)
       .then((res) => res.json())
       .then((data) => {
         setData(data.generations[0].text.split('\n').map(str => <p>{str}</p>));
@@ -82,6 +87,12 @@ function App() {
           <div class="form-group mt-1">
             <label> Client traits:</label>
             <input type="text" class="form-control" name="input-box" value={client_traits} onChange={handleChangeClientTraits} />
+            <br />
+          </div>
+
+          <div class="form-group mt-1">
+            <label> Length of Pitch:</label>
+            <input type="number" class="form-control" name="input-box" value={tokens} onChange={handleChangeTokens} />
             <br />
           </div>
 
