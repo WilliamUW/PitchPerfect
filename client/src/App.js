@@ -4,7 +4,7 @@ import './App.css'
 function App() {
   const [data, setData] = React.useState(null)
   const [prompt, setPrompt] = React.useState('')
-  const [product, setProduct] = React.useState('')
+  const [product, setProduct] = React.useState('Zephyrus G14')
 
 
   // Update prompt variable when handleChange is called
@@ -17,22 +17,22 @@ function App() {
     setProduct(abc.target.value)
   }
 
-  const [product_traits, setProductTraits] = React.useState('')
+  const [product_traits, setProductTraits] = React.useState('Fast, good cooling, RGB, best in class performance, light, LED matrix')
   const handleChangeProductTraits = (abc) => {
     setProductTraits(abc.target.value)
   }
 
-  const [seller, setSeller] = React.useState('')
+  const [seller, setSeller] = React.useState('Asus Sales Team')
   const handleChangeSeller = (abc) => {
     setSeller(abc.target.value)
   }
 
-  const [client, setClient] = React.useState('')
+  const [client, setClient] = React.useState('Justin Chang, a second year Uoft CS student')
   const handleChangeClient = (abc) => {
     setClient(abc.target.value)
   }
 
-  const [client_traits, setClientTraits] = React.useState('')
+  const [client_traits, setClientTraits] = React.useState('Plays cyberpunk, valorant, Uoft Student, high refresh rate display, loves battery life, performance, portability, AMD CPU, reasonable price')
   const handleChangeClientTraits = (abc) => {
     setClientTraits(abc.target.value)
   }
@@ -43,9 +43,20 @@ function App() {
     setData(null)
     fetch(`/api?prompt=${prompt}&product=${product}&productTraits=${product_traits}&seller=${seller}&client=${client}&clientTraits=${client_traits}`)
       .then((res) => res.json())
-      .then((data) => setData(`${data.generations[0].text.slice(0, -1)}`))
-  }
+      .then((data) => {
+        // setData(`${data.generations[0].text.slice(0, -1).replace("<br/>", "<br/><br/>")}`);
+        // setData(data.replace("\n", "\n\n"));
+        // console.log("Data typw: " + typeof data);
+        // console.log("Data text: " + data.generations[0].text);
+        // console.log("Data tyoe text: " + typeof data.generations[0].text);
+        // console.log("Data n: " + data.generations[0].text.replace("\n", "\n\n"));
 
+        setData(data.generations[0].text.split('\n').map(str => <p>{str}</p>));
+        data.text.split('\n').map(str => <p>{str}</p>)
+      }
+      )
+  }
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -81,10 +92,12 @@ function App() {
           <input type="submit" value="Submit" />
         </form>
         <h1>Result:</h1>
-        <h3>{!data ? 'Loading' : data}</h3>
+        <div>{!data ? 'Loading' : data}</div>
 
-        <p>Feedback? <a href="mailto:elaine@cohere.com" className="App-link">Send me an email</a>. For errors please include a screenshot.</p>
-        <p>Powered by <a href="https://cohere.ai/" className="App-link">Cohere</a></p>
+        
+
+        {/* <p>Feedback? <a href="mailto:elaine@cohere.com" className="App-link">Send me an email</a>. For errors please include a screenshot.</p>
+        <p>Powered by <a href="https://cohere.ai/" className="App-link">Cohere</a></p> */}
       </header>
     </div>
   )
