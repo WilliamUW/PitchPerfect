@@ -10,7 +10,8 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.get("/api", async (req, res) => {
   console.log("get api call")
-  const prompt = 'Command: Write a sales pitch email from Asus Sales Team to Justin who Plays cyberpunk, valorant, Uoft Student, high refresh rate display, loves battery life, performance, portability, AMD CPU, reasonable price regarding why he must buy the new Zephyrus G14 which is Fast, good cooling, RGB, best in class performance, light, LED matrix. \nSales Email:'
+  console.log(req.query)
+  const prompt = `Command: Write a sales pitch email from ${req.query.seller} to ${req.query.client} who ${req.query.clientTraits} regarding why ${req.query.client} must buy the new ${req.query.product} which is ${req.query.productTraits} \nSales Email:`
   // const prompt = `Command: Write a sales pitch for ${req.query.prompt}` || "This is a default article because you did not enter anything"
   const response = await cohere.generate('xlarge', {
     prompt: prompt,
