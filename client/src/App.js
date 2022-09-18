@@ -25,7 +25,7 @@ function App() {
         <h1>Trivia Generator</h1>
         <form onSubmit={handleSubmit}>
           <label>
-            Give me a topic: <br/>
+            What do you want to sell: <br/>
             <textarea name="input-box" rows="5" cols="100" value={prompt} onChange={handleChange}/>
           </label>  
           <br/>

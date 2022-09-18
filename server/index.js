@@ -10,17 +10,25 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.get("/api", async (req, res) => {
   console.log("get api call")
-  const prompt = `${req.query.prompt}` || "This is a default article because you did not enter anything"
+  const prompt = 'Command: Write a sales pitch email from Asus Sales Team to Justin who Plays cyberpunk, valorant, Uoft Student, high refresh rate display, loves battery life, performance, portability, AMD CPU, reasonable price regarding why he must buy the new Zephyrus G14 which is Fast, good cooling, RGB, best in class performance, light, LED matrix. \nSales Email:'
+  // const prompt = `Command: Write a sales pitch for ${req.query.prompt}` || "This is a default article because you did not enter anything"
   const response = await cohere.generate('xlarge', {
-    prompt,
-    max_tokens: 50,
-    temperature: 0.5,
+    prompt: prompt,
+    max_tokens: 250,
+    temperature: 0.8,
     k: 0,
-    p: 0.75,
-    stop_sequences: ['-']
+    p: 1,
+    frequency_penalty: 0, 
+    presence_penalty: 0, 
+    stop_sequences: ['--'],
+    return_likelihoods: 'NONE' 
   })
   console.log(response)
+  console.log(response.body.generations)
   response.body.prompt = prompt
+
+  // to do ignore eveyrthing after last period
+
   res.json(response.body)
 })
 
