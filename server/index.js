@@ -18,7 +18,7 @@ app.get("/api", async (req, res) => {
   const response = await cohere.generate('xlarge', {
     prompt: prompt,
     max_tokens: tokensNum,
-    temperature: 0.6,
+    temperature: 0.7,
     k: 0,
     p: 1,
     frequency_penalty: 0, 

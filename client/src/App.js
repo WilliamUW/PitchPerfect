@@ -61,37 +61,37 @@ function App() {
         <h1 class="mt-5">Personalized Sales Pitch Generator</h1>
         <form onSubmit={handleSubmit}>
           <div class="form-group bg-dark text-white mt-3">
-            <label > Who are you: </label>
+            <label > Who Are You: </label>
             <input type="text" class="form-control" name="input-box" value={seller} onChange={handleChangeSeller} />
             <br />
           </div>
 
           <div class="form-group bg-dark text-white mt-1">
-            <label> What do you want to sell: </label>
+            <label> What Do You Want To Sell: </label>
             <input type="text" class="form-control" name="input-box" value={product} onChange={handleChangeProduct} />
             <br />
           </div>
 
           <div class="form-group mt-1">
-            <label>Product traits: </label>
+            <label>Product Keywords: </label>
             <input type="text" class="form-control" name="input-box" value={product_traits} onChange={handleChangeProductTraits} />
             <br />
           </div>
 
           <div class="form-group mt-1">
-            <label>Who are you selling to:</label>
+            <label>Who is the Client:</label>
             <input type="text" class="form-control" name="input-box" value={client} onChange={handleChangeClient} />
             <br />
           </div>
 
           <div class="form-group mt-1">
-            <label> Client traits:</label>
+            <label> Client Keywords:</label>
             <input type="text" class="form-control" name="input-box" value={client_traits} onChange={handleChangeClientTraits} />
             <br />
           </div>
 
           <div class="form-group mt-1">
-            <label> Length of Pitch:</label>
+            <label> Length of Pitch (In Words):</label>
             <input type="number" class="form-control" name="input-box" value={tokens} onChange={handleChangeTokens} />
             <br />
           </div>
