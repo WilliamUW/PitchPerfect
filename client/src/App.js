@@ -16,7 +16,7 @@ function App() {
     setProduct(abc.target.value)
   }
 
-  const [product_traits, setProductTraits] = React.useState('Fast, good cooling, RGB, best in class performance, light, LED matrix')
+  const [product_traits, setProductTraits] = React.useState('fast, good cooling, RGB, best in class performance, light, LED matrix')
   const handleChangeProductTraits = (abc) => {
     setProductTraits(abc.target.value)
   }
@@ -31,7 +31,7 @@ function App() {
     setClient(abc.target.value)
   }
 
-  const [client_traits, setClientTraits] = React.useState('Plays cyberpunk, valorant, Uoft Student, high refresh rate display, loves battery life, performance, portability, AMD CPU, reasonable price')
+  const [client_traits, setClientTraits] = React.useState('plays cyberpunk, valorant, Uoft Student, high refresh rate display, loves battery life, performance, portability, AMD CPU, reasonable price')
   const handleChangeClientTraits = (abc) => {
     setClientTraits(abc.target.value)
   }
