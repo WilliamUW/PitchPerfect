@@ -36,7 +36,7 @@ function App() {
     setClientTraits(abc.target.value)
   }
 
-  const [tokens, setTokens] = React.useState(250)
+  const [tokens, setTokens] = React.useState(150)
   const handleChangeTokens = (abc) => {
     setTokens(abc.target.value)
   }
