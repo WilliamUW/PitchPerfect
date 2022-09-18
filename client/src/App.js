@@ -43,44 +43,45 @@ function App() {
     setData(null)
     fetch(`/api?prompt=${prompt}&product=${product}&productTraits=${product_traits}&seller=${seller}&client=${client}&clientTraits=${client_traits}`)
       .then((res) => res.json())
-      .then((data) => setData(`${data.generations[0].text.slice(0,-1)}`)) 
+      .then((data) => setData(`${data.generations[0].text.slice(0, -1)}`))
   }
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Trivia Generator</h1>
+        <h1>Personalized Sales Pitch Generator</h1>
         <form onSubmit={handleSubmit}>
           <label>
-            What do you want to sell: <br/>
-            <textarea name="input-box" rows="5" cols="100" value={product} onChange={handleChangeProduct}/>
-          </label>  
-          <br/>
-          <label>
-            Product traits: <br/>
-            <textarea name="input-box" rows="5" cols="100" value={product_traits} onChange={handleChangeProductTraits}/>
+            Who are you: <br />
+            <textarea name="input-box" rows="5" cols="100" value={seller} onChange={handleChangeSeller} />
           </label>
-          <br/>
+          <br />
           <label>
-            Who are you: <br/>
-            <textarea name="input-box" rows="5" cols="100" value={seller} onChange={handleChangeSeller}/>
-          </label>  
-          <br/>
+            What do you want to sell: <br />
+            <textarea name="input-box" rows="5" cols="100" value={product} onChange={handleChangeProduct} />
+          </label>
+          <br />
           <label>
-            Who are you selling to: <br/>
-            <textarea name="input-box" rows="5" cols="100" value={client} onChange={handleChangeClient}/>
-          </label> 
-          <br/> 
+            Product traits: <br />
+            <textarea name="input-box" rows="5" cols="100" value={product_traits} onChange={handleChangeProductTraits} />
+          </label>
+          <br />
+
           <label>
-            Client traits: <br/>
-            <textarea name="input-box" rows="5" cols="100" value={client_traits} onChange={handleChangeClientTraits}/>
-          </label>  
-          
-          <br/>
+            Who are you selling to: <br />
+            <textarea name="input-box" rows="5" cols="100" value={client} onChange={handleChangeClient} />
+          </label>
+          <br />
+          <label>
+            Client traits: <br />
+            <textarea name="input-box" rows="5" cols="100" value={client_traits} onChange={handleChangeClientTraits} />
+          </label>
+
+          <br />
           <input type="submit" value="Submit" />
         </form>
         <h1>Result:</h1>
-        <h3>{!data ? 'Question will appear here. Try general topics like "Sports" or "Entertainment".' : data}</h3>
+        <h3>{!data ? 'Loading' : data}</h3>
 
         <p>Feedback? <a href="mailto:elaine@cohere.com" className="App-link">Send me an email</a>. For errors please include a screenshot.</p>
         <p>Powered by <a href="https://cohere.ai/" className="App-link">Cohere</a></p>

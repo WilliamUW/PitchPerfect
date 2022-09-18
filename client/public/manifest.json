@@ -1,6 +1,6 @@
 {
-  "short_name": "Trivia generator",
-  "name": "Trivia generator powered by Cohere",
+  "short_name": "Personalized Sales Pitch Generator",
+  "name": "Personalized Sales Pitch Generator powered by Cohere",
   "icons": [
     {
       "src": "favicon.ico",
