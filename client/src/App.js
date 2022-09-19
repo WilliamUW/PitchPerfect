@@ -3,13 +3,13 @@ import './App.css'
 
 function App() {
   const [data, setData] = React.useState(null)
-  const [prompt, setPrompt] = React.useState('')
+  // const [prompt, setPrompt] = React.useState('')
   const [product, setProduct] = React.useState('Zephyrus G14')
 
   // Update prompt variable when handleChange is called
-  const handleChange = (abc) => {
-    setPrompt(abc.target.value)
-  }
+  // const handleChange = (abc) => {
+  //   setPrompt(abc.target.value)
+  // }
 
   // Update prompt variable when handleChange is called
   const handleChangeProduct = (abc) => {
@@ -45,7 +45,7 @@ function App() {
   const handleSubmit = (abc) => {
     abc.preventDefault()
     setData("Processing...")
-    fetch(`/api?prompt=${prompt}&product=${product}&productTraits=${product_traits}&seller=${seller}&client=${client}&clientTraits=${client_traits}&tokens=${tokens}`)
+    fetch(`/api?&product=${product}&productTraits=${product_traits}&seller=${seller}&client=${client}&clientTraits=${client_traits}&tokens=${tokens}`)
       .then((res) => res.json())
       .then((data) => {
         setData(data.generations[0].text.split('\n').map(str => <p>{str}</p>));
