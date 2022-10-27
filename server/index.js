@@ -11,8 +11,9 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.get("/api", async (req, res) => {
   console.log("get api call")
   console.log(req.query)
-  const prompt = `Command: Write a sales pitch email from ${req.query.seller} to ${req.query.client} who ${req.query.clientTraits} regarding why ${req.query.client} must buy the new ${req.query.product} which is ${req.query.productTraits} \nSales Email:`
+  const prompt = `Command: Write a sales pitch email from ${req.query.seller} to ${req.query.client} who ${req.query.clientTraits} regarding why ${req.query.client} must buy the new ${req.query.product} which is ${req.query.productTraits} \nSales Email: Hello ${req.query.prompt}, \nI am here to tell you why you should buy ${req.query.product}.`
   // const prompt = `Command: Write a sales pitch for ${req.query.prompt}` || "This is a default article because you did not enter anything"
+  response.body.prompt = "Hello ${req.query.prompt}, \nI am here to tell you why you should buy ${req.query.product}."
   console.log("Prompt: " + prompt);
   const response = await cohere.generate('xlarge', {
     prompt: prompt,
@@ -27,7 +28,7 @@ app.get("/api", async (req, res) => {
   })
   console.log(response)
   console.log(response.body.generations)
-  response.body.prompt = prompt
+  response.body.prompt += prompt
 
   // to do ignore eveyrthing after last period
 
