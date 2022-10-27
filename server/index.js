@@ -15,10 +15,11 @@ app.get("/api", async (req, res) => {
   // const prompt = `Command: Write a sales pitch for ${req.query.prompt}` || "This is a default article because you did not enter anything"
   response.body.prompt = "Hello ${req.query.prompt}, \nI am here to tell you why you should buy ${req.query.product}."
   console.log("Prompt: " + prompt);
+  let tokensNum = parseInt(`${req.query.tokens}`) || 150
   const response = await cohere.generate('xlarge', {
     prompt: prompt,
-    max_tokens: 250,
-    temperature: 0.6,
+    max_tokens: tokensNum,
+    temperature: 0.8,
     k: 0,
     p: 1,
     frequency_penalty: 0, 
