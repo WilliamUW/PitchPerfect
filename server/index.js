@@ -11,9 +11,9 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.get("/api", async (req, res) => {
   console.log("get api call")
   console.log(req.query)
-  const prompt = `Command: Write a sales pitch email from ${req.query.seller} to ${req.query.client} who ${req.query.clientTraits} regarding why ${req.query.client} must buy the new ${req.query.product} which is ${req.query.productTraits} \nSales Email: Hello ${req.query.prompt}, \nI am here to tell you why you should buy ${req.query.product}.`
+  const intro = `Hello ${req.query.client}, \nI am here to tell you why ${req.query.product} is the product for you!`;
+  const prompt = `Command: Write a sales pitch email from ${req.query.seller} to ${req.query.client} who ${req.query.clientTraits} regarding why ${req.query.client} must buy the new ${req.query.product} which is ${req.query.productTraits} \nSales Email: Hello ${req.query.client}, \n` + intro;
   // const prompt = `Command: Write a sales pitch for ${req.query.prompt}` || "This is a default article because you did not enter anything"
-  response.body.prompt = "Hello ${req.query.prompt}, \nI am here to tell you why you should buy ${req.query.product}."
   console.log("Prompt: " + prompt);
   let tokensNum = parseInt(`${req.query.tokens}`) || 150
   const response = await cohere.generate('xlarge', {
@@ -22,17 +22,19 @@ app.get("/api", async (req, res) => {
     temperature: 0.8,
     k: 0,
     p: 1,
-    frequency_penalty: 0, 
-    presence_penalty: 0, 
+    frequency_penalty: 0,
+    presence_penalty: 0,
     stop_sequences: ['--'],
-    return_likelihoods: 'NONE' 
+    return_likelihoods: 'NONE'
   })
-  console.log(response)
-  console.log(response.body.generations)
-  response.body.prompt += prompt
+  response.body.generations[0].text = `Hello ${req.query.client}, \nI am here to tell you why you should buy ${req.query.product}.` + response.body.generations[0].text
+  console.log("response", response)
+  console.log("response.body", response.body)
+  console.log("response.body.generations", response.body.generations)
+  //response.body.prompt += `Hello ${req.query.client}, \nI am here to tell you why you should buy ${req.query.product}.`;
+  //response.body.prompt += prompt;
 
   // to do ignore eveyrthing after last period
-
   res.json(response.body)
 })
 
