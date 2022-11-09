@@ -27,7 +27,7 @@ app.get("/api", async (req, res) => {
     stop_sequences: ['--'],
     return_likelihoods: 'NONE'
   })
-  response.body.generations[0].text = `Hello ${req.query.client}, \nI am here to tell you why you should buy ${req.query.product}.` + response.body.generations[0].text
+  response.body.generations[0].text = intro + response.body.generations[0].text
   console.log("response", response)
   console.log("response.body", response.body)
   console.log("response.body.generations", response.body.generations)
